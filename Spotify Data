@@ -1,0 +1,57 @@
+# For this project, I downloaded Spotify data from Kaggle.
+# I then created a table to insert Spotify data into.
+# Lastly, I performed analytics on the data using SQL. 
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+#Then I inserted the Spotify Data .csv into the table.
+
+#I used SQL to ask the following questions I had of the data.
+
+
+# How many times does each artist show up on this list?;
+
+SELECT count(artist_name), artist_name
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY count(artist_name) desc;
+
+# What are the 10 most popular song?;
+
+SELECT artist_name, track_name, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY popularity desc
+Limit 10;
+
+# What is the average duration of songs by Olivia Rodrigo?;
+
+SELECT artist_name, AVG(duration_ms)
+FROM BIT_DB.Spotifydata
+WHERE artist_name = 'Olivia Rodrigo'
+GROUP BY artist_name;
+
+# What is the average tempo, danceability, energy, and loudness of song that have a popularity of 90 or higher?;
+
+SELECT avg(tempo), avg(danceability), avg(energy), avg(loudness)
+FROM BIT_DB.Spotifydata
+WHERE popularity >89
