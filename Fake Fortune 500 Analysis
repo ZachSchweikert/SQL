@@ -89,7 +89,7 @@ ORDER BY revenue_grade;
 
 
 # How many companies and in each grade based on the previous query.
-SELECT COUNT(*),
+SELECT COUNT(*) AS total,
 CASE WHEN revenue >= 500 THEN "A"
 WHEN revenue >= 400 THEN "B"
 WHEN revenue >= 300 THEN "C"
