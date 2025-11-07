@@ -48,3 +48,16 @@ WHERE category = 'Kitchen Supplies';
 SELECT item_name, stock_quantity
 FROM superstore
 WHERE item_name = 'Cotton Bedding Set' OR item_name = 'Cutlery Set'
+
+#Find items that have a price greater than $100 and have more 25 in stock.
+SELECT item_name, price, stock_quantity
+FROM superstore
+WHERE price > 100
+AND stock_quantity >25;
+
+#What are the 5 items that have the highest value in the store?
+SELECT item_name, SUM(price * stock_quantity)
+FROM superstore
+GROUP BY item_name
+ORDER BY SUM(price * stock_quantity) desc
+LIMIT 5;
